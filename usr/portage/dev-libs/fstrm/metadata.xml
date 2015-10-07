@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer>
+		<email>maintainer-needed@gentoo.org</email>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">farsightsec/fstrm</remote-id>
+	</upstream>
+	<use>
+		<flag name="utils">Build fstrm utility programs</flag>
+	</use>
+</pkgmetadata>

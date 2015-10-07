@@ -1,0 +1,90 @@
+{
+	"info": {
+		"/usr/share/binutils-data/x86_64-pc-linux-gnu/2.24/info": 1441830632,
+		"/usr/share/binutils-data/x86_64-pc-linux-gnu/2.25.1/info": 1443793910,
+		"/usr/share/gcc-data/x86_64-pc-linux-gnu/4.8.5/info": 1441830632,
+		"/usr/share/info": 1443794768
+	},
+	"ldpath": {
+		"/lib": 1442596525,
+		"/lib32": 1441252925,
+		"/lib64": 1442596525,
+		"/usr/lib": 1442935863,
+		"/usr/lib32": 1441252925,
+		"/usr/lib64": 1442935863,
+		"/usr/lib64/opengl/xorg-x11/lib": 1442526039,
+		"/usr/local/lib": 1441245133,
+		"/usr/local/lib64": 1441245133
+	},
+	"resume_backup": {
+		"favorites": [
+			"sys-kernel/genkernel-next"
+		],
+		"mergelist": [
+			[
+				"ebuild",
+				"/",
+				"dev-libs/boost-1.56.0-r1",
+				"merge"
+			],
+			[
+				"ebuild",
+				"/",
+				"sys-block/thin-provisioning-tools-0.4.1",
+				"merge"
+			],
+			[
+				"ebuild",
+				"/",
+				"sys-fs/lvm2-2.02.109",
+				"merge"
+			],
+			[
+				"ebuild",
+				"/",
+				"app-text/docbook-xml-dtd-4.5-r1",
+				"merge"
+			],
+			[
+				"ebuild",
+				"/",
+				"app-text/asciidoc-8.6.9-r1",
+				"merge"
+			],
+			[
+				"ebuild",
+				"/",
+				"sys-kernel/genkernel-next-63",
+				"merge"
+			]
+		],
+		"myopts": {}
+	},
+	"starttime": 0,
+	"updates": {
+		"/usr/portage/profiles/updates/1Q-2010": 1439152493,
+		"/usr/portage/profiles/updates/1Q-2011": 1439152493,
+		"/usr/portage/profiles/updates/1Q-2012": 1439152493,
+		"/usr/portage/profiles/updates/1Q-2013": 1439152493,
+		"/usr/portage/profiles/updates/1Q-2014": 1439152493,
+		"/usr/portage/profiles/updates/1Q-2015": 1439152493,
+		"/usr/portage/profiles/updates/2Q-2010": 1439152493,
+		"/usr/portage/profiles/updates/2Q-2011": 1439152493,
+		"/usr/portage/profiles/updates/2Q-2012": 1439152493,
+		"/usr/portage/profiles/updates/2Q-2013": 1439152493,
+		"/usr/portage/profiles/updates/2Q-2014": 1439152493,
+		"/usr/portage/profiles/updates/2Q-2015": 1439152493,
+		"/usr/portage/profiles/updates/3Q-2010": 1439152493,
+		"/usr/portage/profiles/updates/3Q-2011": 1439152493,
+		"/usr/portage/profiles/updates/3Q-2012": 1439152493,
+		"/usr/portage/profiles/updates/3Q-2013": 1439152493,
+		"/usr/portage/profiles/updates/3Q-2014": 1439152493,
+		"/usr/portage/profiles/updates/3Q-2015": 1443247261,
+		"/usr/portage/profiles/updates/4Q-2010": 1439152493,
+		"/usr/portage/profiles/updates/4Q-2011": 1439152493,
+		"/usr/portage/profiles/updates/4Q-2012": 1439152493,
+		"/usr/portage/profiles/updates/4Q-2013": 1439152493,
+		"/usr/portage/profiles/updates/4Q-2014": 1439152493
+	},
+	"version": "2.2.20.1"
+}
