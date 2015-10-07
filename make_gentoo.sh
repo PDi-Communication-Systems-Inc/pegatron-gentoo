@@ -14,6 +14,8 @@ rm usr/src/linux-4.0.5-gentoo/.config
 
 #General Directives
 NUM_THREADS=16
+START_DIR=$PWD
+echo Starting directory is $START_DIR
 
 if [[ -z "$TARGET_OUT_DIR" ]]
 then
@@ -58,8 +60,8 @@ cp -p usr/src/linux-4.0.5-gentoo/arch/x86/configs/pegatron_defconfig usr/src/lin
 cd usr/src/linux-4.0.5-gentoo/
 make clean ARCH=x86_64
 export KERNEL_VERSION=$(make -s kernelrelease ARCH=x86)
-SCRIPT_INSTALL_MOD_BASE=$PWD/out/$KERNEL_VERSION
-SCRIPT_INSTALL_PATH=$PWD/out/$KERNEL_VERSION
+SCRIPT_INSTALL_MOD_BASE=$START_DIR/out/$KERNEL_VERSION
+SCRIPT_INSTALL_PATH=$START_DIR/out/$KERNEL_VERSION
 make -j$NUM_THREADS ARCH=x86_64
 make -j$NUM_THREADS ARCH=x86_64 INSTALL_MOD_PATH=$SCRIPT_INSTALL_MOD_PATH modules_install
 make -j$NUM_THREADS ARCH=x86_64 INSTALL_PATH=$SCRIPT_INSTALL_PATH install
