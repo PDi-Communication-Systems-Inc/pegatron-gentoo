@@ -1,13 +1,19 @@
 #!/bin/bash
 
-NUM_THREADS=16
-
+# Sanity check
 if [[ "$#" -lt 2 ]]; 
 then
     echo "Illegal number of parameters"
     echo "usage: HOST_OUT_DIR TARGET_OUT_DIR"
     exit
 fi
+
+# Remove old output
+rm -rf out/
+rm usr/src/linux-4.0.5-gentoo/.config
+
+#General Directives
+NUM_THREADS=16
 
 if [[ -z "$TARGET_OUT_DIR" ]]
 then
@@ -47,10 +53,16 @@ mount --make-rslave $TARGET_OUT_DIR/var/tmp/genkernel
 # Kernel Source & Build
 mount --rbind $HOST_OUT_DIR/usr/src $TARGET_OUT_DIR/usr/src
 mount --make-rslave $TARGET_OUT_DIR/usr/src
+mkdir -p out/$KERNEL_VERSION
 cp -p usr/src/linux-4.0.5-gentoo/arch/x86/configs/pegatron_defconfig usr/src/linux-4.0.5-gentoo/.config
 cd usr/src/linux-4.0.5-gentoo/
 make clean ARCH=x86_64
+export KERNEL_VERSION=$(make -s kernelrelease ARCH=x86)
+SCRIPT_INSTALL_MOD_BASE=out/$KERNEL_VERSION
+SCRIPT_INSTALL_PATH=out/$KERNEL_VERSION
 make -j$NUM_THREADS ARCH=x86_64
+make -j$NUM_THREADS ARCH=x86_64 INSTALL_MOD_PATH=$SCRIPT_INSTALL_MOD_PATH modules_install
+make -j$NUM_THREADS ARCH=x86_64 INSTALL_PATH=$SCRIPT_INSTALL_PATH install
 
 # Create swap file
 dd if=/dev/zero of=$TARGET_OUT_DIR/swapfile bs=1M count=2048
