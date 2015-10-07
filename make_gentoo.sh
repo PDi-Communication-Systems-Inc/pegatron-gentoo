@@ -45,6 +45,10 @@ mount --make-rslave $TARGET_OUT_DIR/var/tmp/genkernel
 # Kernel Source & Build
 mount --rbind $HOST_OUT_DIR/usr/src $TARGET_OUT_DIR/usr/src
 mount --make-rslave $TARGET_OUT_DIR/usr/src
+cp -p usr/src/linux-4.0.5-gentoo/arch/x86/configs/pegatron_defconfig usr/src/linux-4.0.5-gentoo/.config
+cd usr/src/linux-4.0.5-gentoo/
+make clean ARCH=x86_64
+make -j16 ARCH=x86_64
 
 # Create swap file
 dd if=/dev/zero of=$TARGET_OUT_DIR/swapfile bs=1M count=2048
