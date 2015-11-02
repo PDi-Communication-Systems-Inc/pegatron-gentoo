@@ -9,7 +9,18 @@
 # 1.0       10/07/2015  mrobbeloth   Initial Version - from Logikos
 #
 # 1.1       11/02/2015  mrobbeloth   Workflow rework
+#
+#                                    Make install directories in out
+#
+#                                    Create log file
+#
+#                                    Keep Track of build time            
+#
+#                                    Exit script on any failure
 #                                    
+#                                    Extra debug messages to keep track of 
+#                                    build
+#
 
 # Sanity check
 #if [[ "$#" -lt 2 ]]; 
@@ -18,6 +29,24 @@
 #    echo "usage: HOST_OUT_DIR TARGET_OUT_DIR"
 #    exit
 # fi
+
+# exit script on any failure, so if it gets to the bottom the build is successful
+set -o errexit
+
+# Keep track of build time
+#################################
+export TIME_FILE=../time.txt
+>$TIME_FILE
+echo "Start Time" >> $TIME_FILE
+echo `date` >> $TIME_FILE
+
+###################################
+
+# Create log file of build
+exec > >(tee ../logfile.txt)
+
+# Redirect output
+exec 2>&1
 
 # Remove old output
 rm -rf out/
@@ -72,15 +101,21 @@ fi
 
 # Kernel Source & Build
 mkdir -p out/$KERNEL_VERSION
-cp -p usr/src/linux-4.0.5-gentoo/arch/x86/configs/pegatron_defconfig usr/src/linux-4.0.5-gentoo/.config
-cd usr/src/linux-4.0.5-gentoo/
+cp -p usr/src/linux/arch/x86/configs/pegatron_defconfig usr/src/linux-4.0.5-gentoo/.config
+cd usr/src/linux/
 make clean ARCH=x86_64
 export KERNEL_VERSION=$(make -s kernelrelease ARCH=x86)
 SCRIPT_INSTALL_MOD_BASE=$START_DIR/out/$KERNEL_VERSION
 SCRIPT_INSTALL_PATH=$START_DIR/out/$KERNEL_VERSION
+mkdir -p -v $SCRIPT_INSTALL_MOD_BASE
+mkdir -p -v $SCRIPT_INSTALL_PATH
+echo "Building Gentoo Kernel"
 make -j$NUM_THREADS ARCH=x86_64
-make -j$NUM_THREADS ARCH=x86_64 INSTALL_MOD_PATH=$SCRIPT_INSTALL_MOD_PATH modules_install
+echo "Installing Gentoo Modules"
+make -j$NUM_THREADS ARCH=x86_64 INSTALL_MOD_PATH=$SCRIPT_INSTALL_MOD_BASE modules_install
+echo "Installing Gentoo kernel in out/"
 make -j$NUM_THREADS ARCH=x86_64 INSTALL_PATH=$SCRIPT_INSTALL_PATH install
+cd ../../../
 
 # Create swap file
 if [[ MAKE_SWAP_FILE = "T" ]];
@@ -92,3 +127,6 @@ if [[ MAKE_SWAP_FILE = "T" ]];
       swapoff -a
       rm -v $TARGET_OUT_DIR/swapfile
 fi
+
+echo "End Time" >> $TIME_FILE
+echo `date` >> $TIME_FILE
