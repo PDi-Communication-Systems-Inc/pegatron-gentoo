@@ -8,3 +8,6 @@ YYYY-MM-DD_gnome3_img for Gnome 3 image
 
 Note for gnome3 based builds, you must use Systemd (not OpenRC)
    See Release notes section 1.4
+
+Prerequisites:
+sudo apt-get install kernel-package
