@@ -36,3 +36,6 @@ alias /dev/midi snd-seq-oss
 
 # Set this to the correct number of cards.
 options snd cards_limit=1
+options snd_hda_intel index=0
+options snd-hda-intel id=PCH index=0
+options snd-hda-intel model=basic
